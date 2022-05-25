@@ -10,4 +10,9 @@ app.get('/message/:id/:name', (request, response) => {
     response.send(`Usuário: ${id} e ID: ${user}`);
 });
 
+app.get('/users', (request, response) => {
+    const {page, limit} = request.query;
+    response.send(`Página: ${page}, Limite: ${limit}`)
+})
+
 app.listen(PORT, () => {console.log(`Express is runing on PORT ${PORT}`)});
