@@ -22,5 +22,6 @@ const usersController = new UsersController(); // Estamos inicializando a nossa 
 
 
 usersRoutes.post('/', myMiddleware, usersController.create ); // Estamos indicando uma rota (primeiro temos que inicializar o Router como feito na linha 6), ao entrar nessa página aqui com o método POST, na raiz da /users, passar pelo middleWare e depois ir para o controle de criação "usersController.create"
+usersRoutes.put('/:id', myMiddleware, usersController.update );
 
 module.exports = usersRoutes; // Estamos exportando todo o Router pelo "usersRoutes"
