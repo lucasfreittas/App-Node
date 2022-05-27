@@ -1,4 +1,4 @@
-const { hash } = require('bcryptjs'); // Importando a função hash que criptografa as senhas de dentro do modulo bcryptjs
+const { hash, compare } = require('bcryptjs'); // Importando a função hash que criptografa as senhas de dentro do modulo bcryptjs
 
 const AppError = require ('../utils/AppError'); // Estamos requisitando aquela classe "AppError" e colocando aqui dentro de uma constante do mesmo nome
 
@@ -25,7 +25,7 @@ class UsersController { // Estamos criando uma classe que irá controlar toda a 
     }
 
     async update(request, response){
-        const { name, email } = request.body;
+        const { name, email, password, old_password } = request.body;
         const { id } = request.params;
 
         const database = await sqliteConnection();
@@ -44,13 +44,30 @@ class UsersController { // Estamos criando uma classe que irá controlar toda a 
         user.name = name;
         user.email = email;
 
+        if( password && !old_password){
+            throw new AppError("Você precisa informar a senha antiga para definir a nova senha");
+        }
+
+        if(password && old_password){
+            const checkOldPassowrd = await compare(old_password, user.password);
+
+            if(!checkOldPassowrd){
+                throw new AppError("A senha antiga não confere");
+            }
+
+            user.password = await hash(password, 8);
+        }
+
+
+
         await database.run(`
         UPDATE users SET
         name = ?,
         email = ?,
+        password = ?,
         updated_at = ?
         WHERE id = ?`,
-        [user.name, user.email, new Date(), id]
+        [user.name, user.email, user.password, new Date(), id]
         );
 
         return response.status(200).json();
