@@ -1,3 +1,5 @@
+const { hash } = require('bcryptjs'); // Importando a função hash que criptografa as senhas de dentro do modulo bcryptjs
+
 const AppError = require ('../utils/AppError'); // Estamos requisitando aquela classe "AppError" e colocando aqui dentro de uma constante do mesmo nome
 
 const sqliteConnection = require('../database/sqlite') // Importar função que conecta com banco de dados
@@ -13,8 +15,10 @@ class UsersController { // Estamos criando uma classe que irá controlar toda a 
            throw new AppError("Este e-mail já está em uso.")
        }
 
+       const hashedPassword = await hash(password, 8); // executando a função "hash" e passando o nível de criptografia, jogando dentro dessa constante "hashed" e no lugar de exportar "passoword" exportamos a "hashed"
+
        await database.run('INSERT INTO users (name, email, password) VALUES (?, ?, ?)', // Caso não exista estamos rodando a constante chamada "database" que está dentro da função "sqliteConnection"
-       [name, email, password]); // Estamos passando nosso nome, email e senha para as tres casas de "?" acima..ou seja lá para o banco de dados
+       [name, email, hashedPassword]); // Estamos passando nosso nome, email e senha para as tres casas de "?" acima..ou seja lá para o banco de dados
 
        
         return response.status(201).json() // Caso tudo certinho, retornar esses dados em formato de json e falar que é status 201 que siguinfica "criado"
