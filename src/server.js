@@ -37,4 +37,4 @@ app.listen(PORT, () => {console.log(`Express is runing on PORT ${PORT}`)}); // A
 
 
 
-//Instalações feitas por essa API: express, nodemon, sqlite3, express-async-errors, bcryptjs
+//Instalações feitas por essa API: express, nodemon, sqlite3, express-async-errors, bcryptjs, knex
