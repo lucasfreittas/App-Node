@@ -18,7 +18,7 @@ function myMiddleware(request, response, next){ // Fizemos uma função de Middl
 
 
 
-const notesController = new UsersController(); // Estamos inicializando a nossa classe "UsersController()" que foi requisitada na linha 4 e passando para uma constante do mesmo nome
+const notesController = new NotesController(); // Estamos inicializando a nossa classe "UsersController()" que foi requisitada na linha 4 e passando para uma constante do mesmo nome
 
 
 notesRoutes.post('/:user_id', myMiddleware, notesController.create ); // Estamos indicando uma rota (primeiro temos que inicializar o Router como feito na linha 6), ao entrar nessa página aqui com o método POST, na raiz da /users, passar pelo middleWare e depois ir para o controle de criação "usersController.create"
