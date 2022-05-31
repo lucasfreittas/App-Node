@@ -23,5 +23,6 @@ const notesController = new NotesController(); // Estamos inicializando a nossa 
 
 notesRoutes.post('/:user_id', notesController.create ); // Estamos indicando uma rota (primeiro temos que inicializar o Router como feito na linha 6), ao entrar nessa página aqui com o método POST, na raiz da /users, passar pelo middleWare e depois ir para o controle de criação "usersController.create"
 notesRoutes.get('/:id', notesController.show );
+notesRoutes.delete('/:id', notesController.delete );
 
 module.exports = notesRoutes; // Estamos exportando todo o Router pelo "usersRoutes"
