@@ -1,8 +1,8 @@
 const { Router } = require('express'); // Estamos requisitando o Router de dentro do express, mesma coisa feita dentro de todas as rotas 
 
 const usersRouter = require('./users.routes'); // Estamos requisitando a página "users.routes" e jogando ela toda dentro dessa const chamada "usersRouter"
-const notesRouter = require('./tags.routes');
-const tagsRouter = require('./notes.routes');
+const notesRouter = require('./notes.routes');
+const tagsRouter = require('./tags.routes');
 
 const routes = Router(); // Estamos inicializando o Router do express (requisitado na linha 1) e colocando dentro de uma constante chamada routes que irá conter todas as rotas da nossa aplicação
 
