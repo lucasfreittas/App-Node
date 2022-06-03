@@ -1,8 +1,8 @@
-const sqliteConnection = require('../../sqlite') // Importando a conexão do SQLITE
-const createUsers = require('./createUsers'); // Importando a const createUsers aqui de dentro do migrations mesmo
+const sqliteConnection = require('../../sqlite');
+const createUsers = require('./createUsers');
 
 
-async function migrationsRun(){ // Função que cria o db automático
+async function migrationsRun(){ 
     const schemas = [
         createUsers
     ].join('');
